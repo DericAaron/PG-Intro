@@ -22,3 +22,15 @@ Download code and do the following:
 - Database Setup
 - create databaseSetup.sql
 - Connect server to DB
+
+###New things:
+modules/pool.js
+- pool.js where we keep connections to DB
+
+###Notes for CRUD:
+- gets need nothing, predetermined --- "GET all SONGS"
+    - search criteria - query params
+
+- POST - uses req.body
+- DELETE - uses request params for id
+- PUT - uses request params for id & req.body for data to update
