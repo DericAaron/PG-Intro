@@ -7,13 +7,11 @@ const router = express.Router();
 
 const pool = require('../modules/pool');
 
-
-
 router.get('/', (req, res) => {
     console.log('In song-router GET to read');
 
     //build a string for the query
-    const queryText = 'SELECT * FROM songs';
+    const queryText = 'SELECT * FROM songs ORDER BY rank DESC';
 
     //query method on pool
     //keep everything within the .then and .catch
@@ -25,8 +23,6 @@ router.get('/', (req, res) => {
             res.sendStatus(500);
         }); 
 });
-
-
 
 router.post('/', (req, res) => {
     console.log('In song-router POST to create' , req.body);
@@ -54,9 +50,9 @@ router.put('/:id', (req, res) => {
     const update = req.body;
     const id = req.params.id;
     //use commas to update multiple fields
-    let queryText = `UPDATE songs SET rank = $2, artist = $3 WHERE id=$1`;
+    let queryText = `UPDATE songs SET rank = $2 WHERE id=$1`;
 
-    pool.query(queryText, [id, update.rank, update.artist])
+    pool.query(queryText, [id, update.rank])
         .then( (result) => {
             console.log('back from DB with', result);
             res.sendStatus(200);

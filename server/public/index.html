@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="vendors/angular.min.js"></script>
+    <script src="scripts/controllers/song.controller.js"></script>
+    <script src="scripts/services/song.service.js"></script>
+    <link rel="stylesheet" href="vendors/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Dubs McSteps</title>
+</head>
+<body>
+    <div ng-app="myApp">
+        <div ng-controller="SongController as SC">
+            <div class="container page">
+                <h1>Postgres Song App</h1>
+                <form>
+                    <input type="text" placeholder="Artist" ng-model="SC.artistIn">
+                    <input type="text" placeholder="Track" ng-model="SC.trackIn">
+                    <input type="text" placeholder="Date" ng-model="SC.dateIn">
+                    <button ng-click="SC.submit()">Submit</button>
+                </form>
+            </div>
+           <br>
+           <br>
+            <div class="container page">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Artist</th>
+                            <th>Track</th>
+                            <th>Published</th>
+                            <th>Rank</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="album in SC.songs">
+                            <td>{{album.artist}}</td>
+                            <td>{{album.track}}</td>
+                            <td>{{album.published}}</td>
+                            <td>{{album.rank}}</td>
+                            <td>
+                                <button ng-click="SC.rankUp( $index )">+</button>
+                                <button ng-click="SC.delete( $index )">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
