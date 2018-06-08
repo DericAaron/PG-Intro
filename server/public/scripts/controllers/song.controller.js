@@ -20,17 +20,12 @@ myApp.controller('SongController', function(SongService){
     } //end getSongs
 
     vm.submit = function(){
-        let date = '';
-        if(vm.dateIn === ''){
-            date = 'unknown';
-        }else{
-            date = vm.dateIn;
-        }
 
         if(vm.artistIn === '' || vm.trackIn === ''){
             alert('Artist and Track Required');
-        }else{
-            SongService.postAlbum(vm.artistIn, vm.trackIn, date).then(function(){
+        }
+        else{
+            SongService.postAlbum(vm.artistIn, vm.trackIn, vm.dateIn).then(function(){
                 vm.getSongs();
                 vm.clearInput();
             });
